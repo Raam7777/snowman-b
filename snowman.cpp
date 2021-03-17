@@ -13,9 +13,26 @@ namespace ariel{
     string rightArm[4] ={">\n","/\n","\\\n","\n"};
     string torso[4]={"( : )","(] [)","(> <)","(   )"};
     string base[4]={" ( : )"," (\" \")"," (___)"," (   )"};
+    bool rightArmUp;
+    bool leftArmUp;
 
-
-    string snowman(int numberSnow)
+    bool checkHand(int numberSnow)
+    {
+        rightArmUp=false;
+        leftArmUp=false;
+        //cheking is if hands up.
+        if((numberSnow/100)%10==2)
+        {
+            rightArmUp=true;
+        }
+        if((numberSnow/1000)%10==2)
+        {
+            leftArmUp=true;
+        }
+        return false;
+    }
+    
+    void checkNumber(int numberSnow)
     {
         int checkInput=numberSnow;
         
@@ -36,18 +53,13 @@ namespace ariel{
         {
             throw string ("There are more than 8 numbers");
         }
+    }
 
-        //cheking is if hands up.
-        bool rightArmUp=false;
-        bool leftArmUp=false;
-        if((numberSnow/100)%10==2)
-        {
-            rightArmUp=true;
-        }
-         if((numberSnow/1000)%10==2)
-        {
-            leftArmUp=true;
-        }
+    string snowman(int numberSnow)
+    {
+        
+        checkNumber(numberSnow);
+        checkHand(numberSnow);
         
         //build the snowman.
         string s="";
@@ -56,6 +68,7 @@ namespace ariel{
         s=s+hat[(numberSnow/10000000)-1];
         
         //build the left arm up.
+        
         if(leftArmUp)
         {
             s=s+leftArm[1];

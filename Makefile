@@ -12,6 +12,9 @@ run: test
 test: TestRunner.o StudentTest1.o StudentTest2.o StudentTest3.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o test
 
+main: Main.o $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o main
+
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
@@ -25,7 +28,7 @@ StudentTest3.cpp: # Eviatar Nachshoni
 	curl https://raw.githubusercontent.com/EN555/EX1-c-/master/Test.cpp > $@
 
 tidy:
-	clang-tidy $(SOURCES) -checks=bugprone-*,clang-analyzer-*,cppcoreguidelines-*,performance-*,portability-*,readability-* --warnings-as-errors=* --
+	clang-tidy $(SOURCES) -checks=bugprone-,clang-analyzer-,cppcoreguidelines-,performance-,portability-,readability- --warnings-as-errors=* --
 
 clean:
 	rm -f *.o test
